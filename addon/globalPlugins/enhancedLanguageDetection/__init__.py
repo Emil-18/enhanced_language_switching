@@ -8,17 +8,14 @@ addonHandler.initTranslation()
 import os
 import sys
 
-<<<<<<< HEAD
-# Lingua can't be imported with relative import, because it requires submodules that I had to include manualy in the lingua folder
-# so add both the add-on folder as well as the underlying lingua folder, to os.path, import lingua, and remove them again
-addonPath = os.path.dirname(__file__)
-linguaPath = os.path.join(os.path.dirname(__file__), "lingua")
-sys.path.append(addonPath)
-sys.path.append(linguaPath)
-import lingua
-from lingua import lingua
-#sys.path.remove(linguaPath)
-#sys.path.remove(addonPath)
+# Vendored `six` lives next to this __init__.py because langdetect does an
+# absolute `import six`. Put the add-on dir on sys.path so that import resolves,
+# then leave it there for the lifetime of the process — once `six` is in
+# sys.modules it stays cached, but langdetect submodules are imported lazily
+# in some code paths, so removing the path entry is unsafe.
+_addonDir = os.path.dirname(__file__)
+if _addonDir not in sys.path:
+	sys.path.insert(0, _addonDir)
 
 import config
 import globalPluginHandler
@@ -30,6 +27,8 @@ from logHandler import log
 from speech.commands import LangChangeCommand
 from speech.extensions import filter_speechSequence
 from . import langdetect
+from . import lingua
+
 profilePath = os.path.join(os.path.dirname(__file__), "langdetect", "profiles")
 languages = os.listdir(profilePath)
 detector = None
