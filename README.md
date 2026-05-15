@@ -2,7 +2,7 @@
 
 * Author: Emil-18
 * NVDA compatibility: 2026.1
-* Download: [Stable version](https://github.com/Emil-18/enhanced_language_switching/releases/download/v1.2.4/enhancedLanguageDetection-1.2.4.nvda-addon).
+* Download: [Stable version](https://github.com/Emil-18/enhanced_language_switching/releases/download/v1.3.4/enhancedLanguageDetection-1.3.4.nvda-addon).
 
 This add-on Automaticly detects the language of the text NVDA is about to speak, and uses NVDA's built in auto language switching, if turned on, to sspeak the text in that language.
 
@@ -31,11 +31,12 @@ That add-on stopped working, however, and from it's issues on GitHub, it doesn't
     This is a list of the languages to interpret. If the add-on interprets a text as a language that isn't selected in this list, no auto language switching is done based on the interpretation. No languages are selected by default.
 
 ## Change log.
-### v1.2.4.
+### v1.3.4
 
 This version was made by @heath-toby.
 
-* Added compatibility with NVDA 2026.1.
+* Added compatibility with NVDA 2026.1 (Python 3.13, 64-bit).
+* Upgraded the bundled lingua language-detection library from v1 (pure Python) to v2 (Rust-backed bindings). v2 is considerably faster and more accurate, but the compiled library is much larger, so the packaged add-on download is bigger than before.
 * Added a setting that allows you to specify the minimum amount of words required for the add-on to activate.
 
 ### v1.2.3
